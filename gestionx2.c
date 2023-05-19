@@ -56,6 +56,15 @@ int main(){
     return 0;
 }
 void printConsult(){
+    /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description: Esta función realiza una consulta en una base de datos y muestra los resultados por pantalla.
+    Param:Ninguno
+    Ver.: 2.0
+    Name: printConsult
+    Return: void
+    */
     dataType tbleLookUp, criteria;
     size_t arrSize;
     char* key, *opc;
