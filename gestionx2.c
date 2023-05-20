@@ -56,6 +56,15 @@ int main(){
     return 0;
 }
 void printConsult(){
+    /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description: Esta función realiza una consulta en una base de datos y muestra los resultados por pantalla.
+    Param:Ninguno
+    Ver.: 2.0
+    Name: printConsult
+    Return: void
+    */
     dataType tbleLookUp, criteria;
     size_t arrSize;
     char* key, *opc;
@@ -105,6 +114,19 @@ void printConsult(){
     return;
 }
 void** consult(dataType tableLookup, dataType criteria,char* key, size_t* arrSize){
+    /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description:Esta función consulta una tabla de búsqueda y devuelve un puntero a un arreglo de datos basado en los criterios de búsqueda proporcionados.
+    Param:
+        - tableLookup: Tipo de tabla de búsqueda (BIBLDB, LOANSDB, etc.).
+        - criteria: Criterio de búsqueda (ISBN, TITLE, etc.).
+        - key: Clave de búsqueda.
+        - arrSize: Puntero al tamaño del arreglo de resultados.
+    Ver.: 2.0
+    Name: Consult
+    Return: Puntero a un arreglo de datos (void**)
+    */
     void** filter = NULL;
     int count = 0;
     char* pointer;
@@ -163,13 +185,13 @@ void** consult(dataType tableLookup, dataType criteria,char* key, size_t* arrSiz
 }
 char* returnBook(){
     /*
-    Author: 
-    Date:
-    Description:
-    Param:
-    Ver.:
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description: Esta función registra la devolución de un libro en el sistema y actualiza los registros correspondientes en la base de datos.
+    Param: Ninguno
+    Ver.: 2.0
     Name: returnBook
-    Return: char*
+    Return: Un puntero a una cadena de caracteres (char*) que indica el resultado de la devolución.
     */
     char* idBook, *idUser;
     int tokenBook, tokenUser;
@@ -195,6 +217,15 @@ char* returnBook(){
     return "Devolucion exitosa.";
 }
 char* borrowBook(){
+    /*
+    Author: Flores Harrison Rosa Esmeralda
+    Date: 18-05-2023
+    Description: Esta función registra el préstamo de un libro en el sistema y actualiza los registros correspondientes en la base de datos.
+    Param: Ninguno
+    Ver.: 2.0
+    Name: borrowBook
+    Return: Un puntero a una cadena de caracteres (char*) que indica el resultado del préstamo.
+    */
     char* isbn;
     char* id;
     int tokenBook, tokenUser;
@@ -217,6 +248,16 @@ char* borrowBook(){
     return "Se realizo el prestamo de manera exitosa.";
 }
 void updateDB(dataType talbleUpdate){
+     /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description: Esta función actualiza la base de datos correspondiente según el tipo de tabla especificada.
+    Param:
+        - talbleUpdate: Un valor de la enumeración dataType que indica la tabla a actualizar (BIBLDB, USERSDB o LOANSDB).
+    Ver.: 2.0
+    Name: updateDB
+    Return: void
+    */ 
     char* fname; int rows;
     FILE* dataBase = fopen("tmp.csv","w");
     if(talbleUpdate == BIBLDB){
@@ -250,11 +291,16 @@ void updateDB(dataType talbleUpdate){
 }
 int findLoan(char* usrID, char* bookID, dataType searchCrit){
     /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description: sta función busca un préstamo en la base de datos de préstamos según los criterios de búsqueda proporcionados.
+    Param: 
+        - usrID: Puntero a una cadena de caracteres que representa el ID del usuario.
+        - bookID: Puntero a una cadena de caracteres que representa el ID del libro o el título del libro, dependiendo del criterio de búsqueda especificado en 'searchCrit'.
+        - searchCrit: Tipo de criterio de búsqueda (ISBN o STRING).
+    Ver.: 2.0
     Name: findLoan
-    Param: char* id
-    Param: char* bookID
-    Param: dataType searchCrit
-    Return: int
+    Return: El índice del préstamo encontrado si se encuentra, o -1 si no se encuentra.
     */
     if(numof.brwd == 0) return -1;
     for(size_t i = 0; i < numof.brwd; i++){
@@ -278,6 +324,19 @@ int findLoan(char* usrID, char* bookID, dataType searchCrit){
     return -1;
 }
 int findInstance(char* key, dataType tableLookup){
+     /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description:Esta función busca una clave en la base de datos especificada por el tipo de tabla.
+    Param:
+        - key: Un puntero a una cadena de caracteres que representa la clave a buscar.
+        - tableLookup: Un valor de la enumeración dataType que indica la base de datos en la cual realizar la búsqueda (BIBLDB o USERSDB).
+    Ver.: 2.0
+    Name: findInstance
+    Return:
+        - Si la clave es encontrada en la base de datos, la función retorna el índice de la instancia correspondiente en el arreglo de la base de datos.
+        - Si la clave no es encontrada, la función retorna -1.
+    */
     char** set;
     int numof_t;
     if(tableLookup == BIBLDB){
@@ -300,6 +359,16 @@ int findInstance(char* key, dataType tableLookup){
     return -1;
 }
 void addInstance(dataType type){
+    /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description:Esta función permite agregar una instancia a la base de datos especificada por el tipo de dato.
+    Param: 
+        - type: Un valor de la enumeración dataType que indica la base de datos a la cual agregar la instancia (BIBLDB o USERSDB).
+    Ver.: 2.0
+    Name: addInstance
+    Return: Void
+    */
     char* aux;
     if(type == BIBLDB){
         aux = getInput("Registre el ISBN del libro: ",ISBN);
@@ -325,6 +394,15 @@ void addInstance(dataType type){
     else return;
 }
 void readDB(){
+    /*
+    Author:Medrano Reyes Julio Cesar
+    Date: 18-05-2023
+    Description:Lee la base de datos y carga la información en las estructuras de datos correspondientes.
+    Param: Ninguno
+    Ver.: 2.0
+    Name: readDB
+    Return: void
+    */
     FILE* dataBase = NULL;
     char aux[STD_LEN];
     char* word = NULL;
@@ -374,6 +452,17 @@ void readDB(){
     return;
 }
 void* getInput(char* message, dataType type){
+    /*
+    Author:Larios Ponche Hector Manuel
+    Date: 18-05-2023
+    Description:Solicita y lee la entrada del usuario de acuerdo al tipo de dato especificado.
+    Param:
+        - message: Mensaje a mostrar al usuario para solicitar la entrada.
+        - type: Tipo de dato esperado (STRING, ISBN, NUMBER, ID).
+    Ver.: 2.0
+    Name: getInput
+    Return:Puntero void que apunta al valor ingresado por el usuario
+    */
     char aux[STD_LEN];
     char* input = NULL;
     size_t auxLen;
